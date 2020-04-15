@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+      <%= link_to("new","/posts/new") %>
+      <h1> post 一覧　</h1>
+       
+       <% @posts.each do |post| %>
+         <div>
+            ---------------------<br>
+            <div class="show_image">
+              <img src="<%= "/user_images/#{post.user.image_name}" %>">
+
+            </div>
+            <%= link_to(post.title,"/posts/#{post.id}") %><br>
+            <%= post.content %> 
+            
+         </div>
+         <%end%>
+
+    </div>
+</body>
+</html>

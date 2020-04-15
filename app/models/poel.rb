@@ -1,0 +1,2 @@
+class Poel < ApplicationRecord
+end

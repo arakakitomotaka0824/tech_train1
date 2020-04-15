@@ -1,0 +1,17 @@
+<% provide(:title, 'Sign up') %>    
+    
+    <div>
+      <h1>user signup</h1>
+       <%= form_tag("/users/create") do %>
+        <h2>user name</h2>
+         <input type="text" name="name" value="<%= @user.name %>">
+        <h2>user email</h2>
+         <input type="text" name="email" value="<%= @user.email %>">
+        <h2>user password</h2>
+         <input type="password" name="password">
+         
+         <input type="submit">
+        <% end %>
+
+    </div>
+   

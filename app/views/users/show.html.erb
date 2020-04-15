@@ -1,0 +1,54 @@
+
+  
+  <div class = "user">
+
+    <h1>
+      Userの詳細画面<br>
+      <img src="<%= "/user_images/#{@user.image_name}" %>"><br>
+      <%= @user.name %><br>
+      <%= @user.email %>
+    </h1>
+
+
+    <% if @user %>
+     <div id="follow_form">
+      <% if @current_user.following?(@user) %>
+        <%= render 'unfollow' %>
+      <% else %>
+        <%= render 'follow' %>
+      <% end %>
+      </div>
+    <% end %>
+
+
+<a href="<%= following_user_path(@user) %>">
+  <%= @user.following.count %>
+following
+</a>
+<a href="<%= followers_user_path(@user) %>">
+  <%= @user.followers.count %>
+followers
+</a>
+     
+    
+    <%= link_to("user編集","/users/#{@user.id}/edit") %>
+
+    <ul class="user-tabs">
+      <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
+      <li class="active"><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+    </ul>
+
+    <% @user.posts.each do |post| %>
+     <div>
+        <div>
+          <img src="<%= "/user_images/#{post.user.image_name}" %>">
+        </div>
+        <div>
+          <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+        </div>
+          <%= link_to(post.title, "/posts/#{post.id}") %>
+          <%= post.content %>
+     </div>
+     <% end %>
+
+  </div>

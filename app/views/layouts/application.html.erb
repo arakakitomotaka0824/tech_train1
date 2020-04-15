@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %> | Ruby on Rails Tutorial Sample App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+  <div class="home">
+    <header>
+      <div class="header-logo">
+        <% if @current_user %>
+          <%= link_to("テクトレ", "/posts/index") %>
+        <% else %>
+          <%= link_to("テクトレ", "/") %>
+        <% end %>
+      </div>
+      <ul class="header-menus">
+        <% if @current_user %>
+          
+          <li>
+            <%= link_to("投稿一覧", "/posts/index") %>
+          </li>
+          <li>
+            <%= link_to("新規投稿", "/posts/new") %>
+          </li>
+          <li>
+            <%= link_to("ユーザー一覧", "/users/index") %>
+          </li>
+          <li>
+            <%= link_to("ログアウト", "/users/logout", {method: :post}) %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to("TweetAppとは", "/about") %>
+          </li>
+          <li>
+            <%= link_to("新規登録", "/users/new") %>
+          </li>
+          <li>
+            <%= link_to("ログイン", "/users/login") %>
+          </li>
+        <% end %>
+      </ul>
+
+    </header>
+
+
+    <div class="content">
+    
+    <div class="side">
+      
+      <% if @current_user %>
+        <ul>
+           <div class= "user">
+            <img src="<%= "/user_images/#{@current_user.image_name}" %>">
+            </div>
+        <li>
+            <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+        </li>
+        <li>
+            <%= link_to("ログアウト", "/users/logout", {method: :post}) %>
+          </li>
+        <ul>
+        <% else %>
+        <ul>
+         <li> noimage </li>
+         <li> guest </li>
+          
+        </ul>
+        <% end %>
+    </div>
+  
+
+    
+      <%= yield %>
+    </div>
+    <footer class="footer">
+    <nav>
+    <ul>
+      <li><%= link_to "About", "/home/about" %></li>
+      <li><%= link_to "Contact", "/home/about" %></li>
+      <li><a href="http://news.railstutorial.org/">News</a></li>
+    </ul>
+    </nav>
+
+    </footer>
+  </div>
+  </body>
+
+</html>
+
